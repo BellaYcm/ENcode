@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Administrator_sk
  * Date: 2014/12/10
- * Time: 15:39
+ * Time: 15:39AAA
  */
 class Encode{
     /**
@@ -33,6 +33,7 @@ class Encode{
         $xml.="<message>message</message>";
         $xml.="</root>";
         echo $xml;
+        exit;
     }
     public static function xmlEncode($code,$message,$data=array()){
         if(!is_numeric($code)){
@@ -49,13 +50,13 @@ class Encode{
         $xml.=self::xmlToEncode($result);
         $xml.="</root>";
         echo $xml;
-
+        exit;
     }
     public static function xmlToEncode($data){
         $xml="";
         foreach($data as $key =>$value){
             $xml.="<{$key}>";#{}当成变量
-            $xml.=$value;
+            $xml.=is_array($value)?self::xmlToEncode($value):$value;
             $xml.="</{$key}>";
         }
         return $xml;
