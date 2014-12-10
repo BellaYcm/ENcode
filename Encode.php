@@ -53,9 +53,13 @@ class Encode{
         exit;
     }
     public static function xmlToEncode($data){
-        $xml="";
+        $xml=$attr="";
         foreach($data as $key =>$value){
-            $xml.="<{$key}>";#{}当成变量
+            if(is_numeric($key)){
+                $attr="id='{$key}''";
+                $key="item";
+            }
+            $xml.="<{$key}{$attr}>";#{}当成变量
             $xml.=is_array($value)?self::xmlToEncode($value):$value;
             $xml.="</{$key}>";
         }
