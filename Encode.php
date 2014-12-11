@@ -6,6 +6,30 @@
  * Time: 15:39AAA
  */
 class Encode{
+    const JSON ="json";
+    public static function show($code,$message ="",$data= array(),$type=self::JSON){
+        if(!is_numeric($code)){
+            return"";
+        }
+        $type=isset($_GET['format'])?$_GET['formate']:self::JSON;
+        $result=array(
+            'code'=>$code,
+            'message'=>$message,
+            'data'=>$data
+        );
+        if($type=="json"){
+            self::json($code,$message,$data);
+        exit;
+        }elseif($type="array"){
+            var_dump($result);
+        }elseif($type="xml"){
+            self::xmlToEncode($code,$message,$data);
+        }else{
+            #todo
+        }
+        exit;
+
+    }
     /**
      * @param $code
      * @param string $message
